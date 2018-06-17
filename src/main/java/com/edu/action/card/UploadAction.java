@@ -53,6 +53,6 @@ String dir=servletContext.getRealPath("/upload");
 File saveFile=new File(dir,fileFileName);
 FileUtils.copyFile(file,saveFile);
 String fieldList="(name,sex,department,mobile,phone,email,address,flag)";
-//DbToExcel.excelToDb(dir+"/"+fileFileName,"card",fieldList,8);
+DbToExcel.excelToDb(dir+"/"+fileFileName,"card",fieldList,8);
 return "success";
 }}

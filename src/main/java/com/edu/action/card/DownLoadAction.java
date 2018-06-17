@@ -22,7 +22,7 @@ public class DownLoadAction extends ActionSupport {
     private long contentLength;
     private String contentDisposition;
     private InputStream inputStream;
-    private String fileName="��Ƭ.xls";
+    private String fileName="名片.xls";
     public String getContentType() {return contentType;}
     public long getContentLength() {return contentLength;}
     public String getContentDisposition() {return contentDisposition;}
@@ -32,8 +32,8 @@ public class DownLoadAction extends ActionSupport {
     		results= {@Result(name="success",type="stream")})
     public String excuteDownLoad() throws Exception{
     	String[] fieldList= {"id","name","sex","department","mobile","phone","email","address","flag"};
-    	String[] titles= {"���","����","�Ա�","��λ","�ֻ�","�绰","��������","��ַ","��ע"};
-    			String file="��Ƭ.xls";
+    	String[] titles= {"序号","姓名","性别","单位","手机","电话","电子邮箱","地址","备注"};
+    			String file="名片.xls";
     	        HttpSession session=ServletActionContext.getRequest().getSession();
     	        String condition=(String)session.getAttribute("condition");
     	        String order=(String)session.getAttribute("order");
@@ -54,7 +54,7 @@ public class DownLoadAction extends ActionSupport {
     	        String fileName2=servletContext.getRealPath("/download/"+file);
     	        File downloadfile=new File(fileName2);
     	        if(!downloadfile.exists()) {downloadfile.getParentFile().mkdirs();}
-    	        //DbToExcel.dBToExcel("card",fieldList,titles,sql,order,fileName2);
+    	        DbToExcel.dBToExcel("card",fieldList,titles,sql,order,fileName2);
     	        inputStream=new FileInputStream(fileName2);
     	        contentLength=inputStream.available();
     	        return SUCCESS;
