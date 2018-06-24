@@ -4,7 +4,7 @@
 <hibernate-configuration>
  <session-factory name="">
   <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="connection.url">jdbc:mysql://localhost:3306/card</property>
+  <property name="connection.url">jdbc:mysql:///card</property>
   <property name="connection.username">root</property>
   <property name="connection.password">123456</property>
   <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>

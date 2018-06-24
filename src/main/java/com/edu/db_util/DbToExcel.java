@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-import org.hibernate.SQLQuery;
+
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -35,9 +37,10 @@ public class DbToExcel {
 		int r = sheet.getRows();
 		for (int i = 1; i < r; i++) {
 			Session session= HibernateUtil.getThreadLocalSession();
-			SQLQuery sqlQuery = session.createSQLQuery(sql);
-			sqlQuery.addEntity(Card.class);
-			
+			//Hibernate 3.* 语句。改成5.0的时候引入的包也要改
+			/*SQLQuery sqlQuery = session.createSQLQuery(sql);
+			sqlQuery.addEntity(Card.class);*/
+			Query sqlQuery=session.createNativeQuery(sql,Card.class);
 			for(int j=0;j<columnCount;j++) {			
 				sqlQuery.setParameter(j+1, sheet.getCell(j+1, i).getContents().toString());
 			}
@@ -77,8 +80,9 @@ public class DbToExcel {
 		}
 		Session session= HibernateUtil.getThreadLocalSession();
 		Transaction tx=session.beginTransaction();
-		SQLQuery sqlQuery=session.createSQLQuery(sql);
-		sqlQuery.addEntity(Card.class);
+		/*SQLQuery sqlQuery=session.createSQLQuery(sql);
+		sqlQuery.addEntity(Card.class);*/
+		Query sqlQuery=session.createNativeQuery(sql,Card.class);
 		List<Card> list=sqlQuery.list();
 		int count = 1;
 		for(Card card:list) {

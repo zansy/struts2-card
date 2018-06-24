@@ -93,7 +93,7 @@ public class CardAction extends ActionSupport {
 		session.setAttribute("condition", condition);
 		session.setAttribute("order", order);
 		return "success";
-	}//sfsdcdsfsd
+	}
 	@Action(
 			value = "findupdate",
 			results={@Result(name="success",location="/card/update.jsp",type="dispatcher")}
